@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class Spelyta {
+public class Spelyta extends JFrame{
 
          public JFrame window;
          public JPanel panel;
@@ -17,7 +17,7 @@ public class Spelyta {
 
          public Spelyta() {
              window = new JFrame();
-             panel = new JPanel();
+             panel = new Meny();
              window.setTitle("Snake");
              window.setSize(width * dimension, height * dimension);
              window.setVisible(true);
@@ -27,6 +27,7 @@ public class Spelyta {
              panel.setVisible(true);
              window.add(panel);
              window.getContentPane() .setBackground( Color.black );
+
 
 
          }
