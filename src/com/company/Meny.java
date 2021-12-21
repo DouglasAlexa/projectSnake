@@ -11,16 +11,24 @@ public class Meny extends JPanel implements ActionListener {
     JButton playButton = new JButton("Start Game");
     JButton scoreButton = new JButton("Show High-Score");
     JButton exitButton = new JButton("Quit Game");
-    
+    JTextArea mainText = new JTextArea("SNAKE 7");
+
     Meny(){
         this.setPreferredSize(new Dimension(width, height));
         this.setFocusable(true);
-        this.setLayout(new GridLayout(0, 1));
+        this.setLayout(new GridBagLayout());
+        this.add(mainText);
+        mainText.setFont(new Font("Verdana", Font.PLAIN, 35));
+       // mainText.setVerticalAlignment(SwingConstants.TOP);
         this.add(playButton);
+        playButton.setPreferredSize(new Dimension(150, 100));
         this.add(scoreButton);
+        scoreButton.setPreferredSize(new Dimension(150, 100));
         scoreButton.addActionListener(this);
         this.add(exitButton);
+        exitButton.setPreferredSize(new Dimension(150, 100));
         exitButton.addActionListener(this);
+
 
     }
 
