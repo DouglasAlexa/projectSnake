@@ -22,14 +22,13 @@ public class Meny extends JPanel implements ActionListener {
        // mainText.setVerticalAlignment(SwingConstants.TOP);
         this.add(playButton);
         playButton.setPreferredSize(new Dimension(150, 100));
+        playButton.addActionListener(this);
         this.add(scoreButton);
         scoreButton.setPreferredSize(new Dimension(150, 100));
         scoreButton.addActionListener(this);
         this.add(exitButton);
         exitButton.setPreferredSize(new Dimension(150, 100));
         exitButton.addActionListener(this);
-
-
     }
 
 
@@ -40,6 +39,10 @@ public class Meny extends JPanel implements ActionListener {
         }
         else if (e.getSource() == exitButton){
             System.exit(0);
-            }
+        }
+        else if (e.getSource() == playButton) {
+            this.setVisible(false);
+            this.add(new GamePanel());
         }
     }
+}
