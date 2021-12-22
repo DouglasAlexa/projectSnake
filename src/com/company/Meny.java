@@ -41,8 +41,11 @@ public class Meny extends JPanel implements ActionListener {
             System.exit(0);
         }
         else if (e.getSource() == playButton) {
-            this.setVisible(false);
+            this.removeAll();
             this.add(new GamePanel());
+            this.repaint();
+            this.invalidate();
+            this.validate();
         }
     }
 }
