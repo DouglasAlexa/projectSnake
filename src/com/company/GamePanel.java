@@ -15,7 +15,8 @@ public class GamePanel extends JPanel implements ActionListener {
     final int y[] = new int[GAME_UNITS];
     int bodyParts = 6;
     boolean gameStarted = false;
-    Timer timer = new Timer(1000, this);
+    Timer timer;
+    char direction = 'R';
 
     GamePanel() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -25,9 +26,22 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void startGame(){
+        timer = new Timer(1000, this);
         gameStarted = true;
         timer.start();
-        
+    }
+
+    public void moveForward(){
+        for (int i = bodyParts; i > 0; i--) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+        }
+        switch (direction){
+            case 'R'->x[0] += UNIT_SIZE;
+            case 'L'->x[0] -= UNIT_SIZE;
+            case 'U'->y[0] -= UNIT_SIZE;
+            case 'D'->y[0] += UNIT_SIZE;
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -50,6 +64,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (gameStarted){
+            moveForward();
+        }
+        repaint();
     }
 }
