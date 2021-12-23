@@ -2,10 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -19,7 +16,6 @@ public class GamePanel extends JPanel implements ActionListener {
     char direction = 'R';
     boolean gameStarted = false;
     Timer timer;
-
 
     GamePanel() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -76,8 +72,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public class MyKeyInput extends KeyAdapter {
         @Override
-        public void keyPressed(KeyEvent k){
-            switch (k.getKeyCode()){
+        public void keyPressed(KeyEvent e){
+            switch (e.getKeyCode()){
                 case KeyEvent.VK_LEFT:
                     if (direction != 'R'){
                         direction = 'L';
@@ -99,7 +95,6 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                     break;
             }
-            System.out.println(k.getKeyCode());
         }
     }
 }
