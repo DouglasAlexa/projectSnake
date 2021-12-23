@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -14,20 +16,22 @@ public class GamePanel extends JPanel implements ActionListener {
     final int x[] = new int[GAME_UNITS];
     final int y[] = new int[GAME_UNITS];
     int bodyParts = 6;
+    char direction = 'R';
     boolean gameStarted = false;
     Timer timer;
-    char direction = 'R';
+
 
     GamePanel() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.yellow);
         this.setFocusable(true);
+        this.addKeyListener(new MyKeyInput());
         startGame();
     }
 
     public void startGame(){
-        timer = new Timer(1000, this);
         gameStarted = true;
+        timer = new Timer(100, this);
         timer.start();
     }
 
@@ -68,5 +72,34 @@ public class GamePanel extends JPanel implements ActionListener {
             moveForward();
         }
         repaint();
+    }
+
+    public class MyKeyInput extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent k){
+            switch (k.getKeyCode()){
+                case KeyEvent.VK_LEFT:
+                    if (direction != 'R'){
+                        direction = 'L';
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (direction != 'L'){
+                        direction = 'R';
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                    if (direction != 'D'){
+                        direction = 'U';
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (direction != 'U'){
+                        direction = 'D';
+                    }
+                    break;
+            }
+            System.out.println(k.getKeyCode());
+        }
     }
 }
