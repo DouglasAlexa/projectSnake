@@ -13,8 +13,7 @@ public class Main {
             ex.setVisible(true);
         });
 
-       // SnakeTestStuff snake = new SnakeTestStuff();
-        //snake.setUpHomeScreen(false);
+
 
 
 
