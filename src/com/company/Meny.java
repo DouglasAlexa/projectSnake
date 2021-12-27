@@ -14,21 +14,25 @@ public class Meny extends JPanel implements ActionListener {
     JTextArea mainText = new JTextArea("SNAKE 7");
 
     Meny(){
-        this.setPreferredSize(new Dimension(width, height));
-        this.setFocusable(true);
-        this.setLayout(new GridBagLayout());
-        this.add(mainText);
+        setPreferredSize(new Dimension(width, height));
+        setFocusable(true);
+        GridBagLayout bagLayout = new GridBagLayout();
+        
+        setLayout(bagLayout);
+
+        add(mainText);
         mainText.setFont(new Font("Verdana", Font.PLAIN, 35));
        // mainText.setVerticalAlignment(SwingConstants.TOP);
-        this.add(playButton);
-        playButton.setPreferredSize(new Dimension(150, 100));
+        add(playButton);
+        playButton.setPreferredSize(new Dimension(200, 100));
         playButton.addActionListener(this);
-        this.add(scoreButton);
-        scoreButton.setPreferredSize(new Dimension(150, 100));
+        add(scoreButton);
+        scoreButton.setPreferredSize(new Dimension(200, 100));
         scoreButton.addActionListener(this);
-        this.add(exitButton);
-        exitButton.setPreferredSize(new Dimension(150, 100));
+        add(exitButton);
+        exitButton.setPreferredSize(new Dimension(200, 100));
         exitButton.addActionListener(this);
+        setBackground(Color.black);
     }
 
 
@@ -41,11 +45,12 @@ public class Meny extends JPanel implements ActionListener {
             System.exit(0);
         }
         else if (e.getSource() == playButton) {
-            this.removeAll();
-            this.add(new GamePanel());
-            this.repaint();
-            this.invalidate();
-            this.validate();
+            removeAll();
+            add(new GamePanel());
+            repaint();
+            invalidate();
+            validate();
+
         }
     }
 }
