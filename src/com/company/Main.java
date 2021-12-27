@@ -2,16 +2,20 @@ package com.company;
 
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
+
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException, InvocationTargetException {
+    public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-        Spelyta ex = new Spelyta();
-        ex.setVisible(true);
+            Spelyta ex = new Spelyta();
+            ex.setVisible(true);
         });
+
+       // SnakeTestStuff snake = new SnakeTestStuff();
+        //snake.setUpHomeScreen(false);
+
 
 
     }

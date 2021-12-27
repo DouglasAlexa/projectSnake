@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-
-    JFrame game = new JFrame();
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -26,8 +26,8 @@ public class GamePanel extends JPanel implements ActionListener {
     GamePanel() {
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.yellow);
-        setFocusable(true);
         addKeyListener(new MyKeyInput());
+        setFocusable(true);
         startGame();
     }
 
@@ -74,6 +74,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         repaint();
     }
+
 
     public class MyKeyInput extends KeyAdapter {
         @Override

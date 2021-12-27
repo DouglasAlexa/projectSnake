@@ -5,7 +5,9 @@ import java.awt.*;
 
 public class Spelyta extends JFrame{
 
-         public Spelyta() {
+
+
+    public Spelyta() {
 
              initUI();
          }
