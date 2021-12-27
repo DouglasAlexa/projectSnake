@@ -49,9 +49,10 @@ public void dispose(){
 
             JFrame test = new JFrame();
             test.setVisible(true);
-            test.setSize(800,800);
+            test.setSize(600,600);
             test.setLocationRelativeTo(null);
             test.add(new GamePanel());
+            test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dispose();
 
 

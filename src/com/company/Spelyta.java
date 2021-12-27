@@ -5,8 +5,6 @@ import java.awt.*;
 
 public class Spelyta extends JFrame{
 
-
-
     public Spelyta() {
 
              initUI();
@@ -19,8 +17,6 @@ public class Spelyta extends JFrame{
              setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
              setLocationRelativeTo(null);
          }
-
-
      }
 
 

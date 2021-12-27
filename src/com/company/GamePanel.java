@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -22,16 +23,23 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean gameStarted = false;
     Timer timer;
 
+    int appleX;
+    int appleY;
+    int appleCount;
+
+    Random random;
 
     GamePanel() {
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.yellow);
         addKeyListener(new MyKeyInput());
         setFocusable(true);
+        random = new Random();
         startGame();
     }
 
     public void startGame() {
+        placeApple();
         gameStarted = true;
         timer = new Timer(100, this);
         timer.start();
@@ -53,6 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawSnake(g);
+        drawApple(g);
     }
 
     public void drawSnake(Graphics g) {
@@ -65,6 +74,18 @@ public class GamePanel extends JPanel implements ActionListener {
             }
             g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
         }
+    }
+
+    public void drawApple(Graphics g) {
+        if (gameStarted) {
+            g.setColor(Color.green);
+            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+        }
+    }
+
+    public void placeApple() {
+        appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     @Override
