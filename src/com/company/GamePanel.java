@@ -2,7 +2,12 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -10,37 +15,38 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    final int x[] = new int[GAME_UNITS];
-    final int y[] = new int[GAME_UNITS];
+    final int[] x = new int[GAME_UNITS];
+    final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
     char direction = 'R';
     boolean gameStarted = false;
     Timer timer;
 
+
     GamePanel() {
-        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setBackground(Color.yellow);
-        this.setFocusable(true);
-        this.addKeyListener(new MyKeyInput());
+        setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        setBackground(Color.yellow);
+        addKeyListener(new MyKeyInput());
+        setFocusable(true);
         startGame();
     }
 
-    public void startGame(){
+    public void startGame() {
         gameStarted = true;
         timer = new Timer(100, this);
         timer.start();
     }
 
-    public void moveForward(){
+    public void moveForward() {
         for (int i = bodyParts; i > 0; i--) {
             x[i] = x[i - 1];
             y[i] = y[i - 1];
         }
-        switch (direction){
-            case 'R'->x[0] += UNIT_SIZE;
-            case 'L'->x[0] -= UNIT_SIZE;
-            case 'U'->y[0] -= UNIT_SIZE;
-            case 'D'->y[0] += UNIT_SIZE;
+        switch (direction) {
+            case 'R' -> x[0] += UNIT_SIZE;
+            case 'L' -> x[0] -= UNIT_SIZE;
+            case 'U' -> y[0] -= UNIT_SIZE;
+            case 'D' -> y[0] += UNIT_SIZE;
         }
     }
 
@@ -54,47 +60,48 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < bodyParts; i++) {
             if (i == 0) {
                 g.setColor(Color.red);
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             } else {
                 g.setColor(new Color(180, 45, 0));
-                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             }
+            g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (gameStarted){
+        if (gameStarted) {
             moveForward();
         }
         repaint();
     }
 
+
     public class MyKeyInput extends KeyAdapter {
         @Override
-        public void keyPressed(KeyEvent e){
-            switch (e.getKeyCode()){
+        public void keyPressed(KeyEvent k) {
+            switch (k.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    if (direction != 'R'){
+                    if (direction != 'R') {
                         direction = 'L';
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (direction != 'L'){
+                    if (direction != 'L') {
                         direction = 'R';
                     }
                     break;
                 case KeyEvent.VK_UP:
-                    if (direction != 'D'){
+                    if (direction != 'D') {
                         direction = 'U';
                     }
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (direction != 'U'){
+                    if (direction != 'U') {
                         direction = 'D';
                     }
                     break;
             }
+
         }
     }
 }
