@@ -60,8 +60,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawSnake(g);
         drawApple(g);
+        drawSnake(g);
     }
 
     public void drawSnake(Graphics g) {
@@ -73,6 +73,12 @@ public class GamePanel extends JPanel implements ActionListener {
                 g.setColor(new Color(180, 45, 0));
             }
             g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+        }
+        for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+
+            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
+            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
+            g.setColor(Color.green);
         }
     }
 
@@ -88,10 +94,19 @@ public class GamePanel extends JPanel implements ActionListener {
         appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
+    public void collecting() {
+        if ((x[0] == appleX) && (y[0] == appleY)) {
+            bodyParts++;
+            appleCount++;
+            placeApple();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameStarted) {
             moveForward();
+            collecting();
         }
         repaint();
     }
