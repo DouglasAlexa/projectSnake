@@ -51,6 +51,7 @@ public void dispose(){
             test.setVisible(true);
             test.setSize(800,800);
             test.setLocationRelativeTo(null);
+            test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             test.add(new GamePanel());
             dispose();
 
