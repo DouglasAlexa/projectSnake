@@ -1,11 +1,13 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -62,6 +64,7 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         drawApple(g);
         drawSnake(g);
+        gameOver(g);
     }
 
     public void drawSnake(Graphics g) {
@@ -73,12 +76,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 g.setColor(new Color(180, 45, 0));
             }
             g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
-        }
-        for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-
-            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-            g.setColor(Color.green);
         }
     }
 
@@ -100,6 +97,14 @@ public class GamePanel extends JPanel implements ActionListener {
             appleCount++;
             placeApple();
         }
+    }
+
+    public void gameOver(Graphics g) {
+        gameStarted = false;
+        g.setFont(new Font("Verdana", Font.BOLD, 52));
+        g.setColor(new Color(25,25,25));
+        FontMetrics metrics1 = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metrics1.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
     }
 
     @Override
