@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
     char direction = 'R';
     boolean gameStarted = false;
     Timer timer;
+    Timer timer2;
 
     int appleX;
     int appleY;
@@ -64,18 +65,22 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         drawApple(g);
         drawSnake(g);
-        gameOver(g);
     }
 
     public void drawSnake(Graphics g) {
         // Draws the bodyparts of the snake
-        for (int i = 0; i < bodyParts; i++) {
-            if (i == 0) {
-                g.setColor(Color.red);
-            } else {
-                g.setColor(new Color(180, 45, 0));
+        if (gameStarted) {
+            for (int i = 0; i < bodyParts; i++) {
+                if (i == 0) {
+                    g.setColor(Color.red);
+                } else {
+                    g.setColor(new Color(180, 45, 0));
+                }
+                g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             }
-            g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+        }
+        else {
+            gameOver(g);
         }
     }
 
@@ -101,10 +106,22 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void gameOver(Graphics g) {
         gameStarted = false;
+        timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
         g.setColor(new Color(25,25,25));
-        FontMetrics metrics1 = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics1.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
+        FontMetrics metricsGame = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metricsGame.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
+        g.setFont(new Font("Verdana", Font.PLAIN, 38));
+        FontMetrics metricsScore = getFontMetrics(g.getFont());
+        g.drawString("Score: " + appleCount, (SCREEN_WIDTH - metricsScore.stringWidth("Score: " + appleCount)) / 2, SCREEN_HEIGHT - g.getFont().getSize());
+        timer2 = new Timer(3000, this);
+        timer2.setRepeats(false);
+        timer2.start();
+    }
+
+    public void dispose(){
+        JFrame parent = (JFrame) this.getTopLevelAncestor();
+        parent.dispose();
     }
 
     @Override
@@ -112,6 +129,19 @@ public class GamePanel extends JPanel implements ActionListener {
         if (gameStarted) {
             moveForward();
             collecting();
+        }
+        else {
+            timer2.stop();
+            JFrame test = new JFrame();
+            test.setVisible(true);
+            test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            test.add(new Meny());
+            test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            test.setResizable(false);
+            test.setTitle("Snake 7 - " + getWidth() + " : " + getHeight());
+            test.pack();
+            test.setLocationRelativeTo(null);
+            dispose();
         }
         repaint();
     }
