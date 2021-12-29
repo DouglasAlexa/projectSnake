@@ -1,13 +1,10 @@
 package com.company;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
-
-
 
 public class Meny extends JPanel implements ActionListener , Serializable {
     static final int width = 1300;
@@ -19,11 +16,9 @@ public class Meny extends JPanel implements ActionListener , Serializable {
     JTextArea mainText = new JTextArea("SNAKE 7");
 
     Meny() {
-
         setPreferredSize(new Dimension(width, height));
         GridBagLayout bagLayout = new GridBagLayout();
         setLayout(bagLayout);
-
         add(mainText);
         mainText.setFont(new Font("Verdana", Font.PLAIN, 35));
         add(playButton);
@@ -49,7 +44,6 @@ public void dispose(){
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         } else if (e.getSource() == playButton) {
-
             JFrame test = new JFrame();
             test.setVisible(true);
             test.setLocationRelativeTo(null);
@@ -60,8 +54,6 @@ public void dispose(){
             test.pack();
             test.setLocationRelativeTo(null);
             dispose();
-
-
         }
     }
 }

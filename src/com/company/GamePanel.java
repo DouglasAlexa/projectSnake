@@ -6,12 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.List;
 
 public class GamePanel extends JPanel implements ActionListener {
-
 
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
@@ -28,7 +25,6 @@ public class GamePanel extends JPanel implements ActionListener {
     int appleX;
     int appleY;
     int appleCount;
-
     Random random;
 
     GamePanel() {
@@ -59,8 +55,6 @@ public class GamePanel extends JPanel implements ActionListener {
             case 'D' -> y[0] += UNIT_SIZE;
         }
     }
-
-
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -124,16 +118,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
         if (!gameStarted) {
             timer.stop();
-
         }
-
     }
 
-
     public void gameOver(Graphics g) {
-
-        scoreClass.setScore(appleCount);
-        System.out.println(scoreClass.getScore());
+        if(GamePanel.ScoreClass.getScore() < appleCount) {
+            scoreClass.setScore(appleCount);
+        }
         gameStarted = false;
         timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
@@ -148,8 +139,6 @@ public class GamePanel extends JPanel implements ActionListener {
         timer2.start();
     }
 
-
-
     public void dispose() {
         JFrame parent = (JFrame) this.getTopLevelAncestor();
         parent.dispose();
@@ -161,7 +150,6 @@ public class GamePanel extends JPanel implements ActionListener {
             moveForward();
             collecting();
             collisionCheck();
-
         } else {
             timer2.stop();
             JFrame test = new JFrame();
@@ -177,7 +165,6 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         repaint();
     }
-
 
     public class MyKeyInput extends KeyAdapter {
         @Override
@@ -204,7 +191,6 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                     break;
             }
-
         }
     }
     public static class ScoreClass {
@@ -220,7 +206,6 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
         public void setScore( int score) {
-
             ScoreClass.score = score;
         }
     }

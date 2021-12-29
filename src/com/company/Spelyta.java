@@ -2,11 +2,9 @@ package com.company;
 
 import javax.swing.*;
 
-
 public class Spelyta extends JFrame {
 
     public Spelyta() {
-
         initUI();
     }
 
