@@ -6,10 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
 public class GamePanel extends JPanel implements ActionListener {
 
+    List<Integer> scoreList = new ArrayList<>();
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -64,7 +67,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawSnake(Graphics g) {
-        // Draws the bodyparts of the snake
+        // Draws the bodyParts of the snake
         if (gameStarted) {
             for (int i = 0; i < bodyParts; i++) {
                 if (i == 0) {
@@ -74,8 +77,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             }
-        }
-        else {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Verdana", Font.PLAIN, 38));
+            FontMetrics metricsScore = getFontMetrics(g.getFont());
+            g.drawString("Score: " + appleCount, (SCREEN_WIDTH - metricsScore.stringWidth("Score: " + appleCount)) / 2, SCREEN_HEIGHT - g.getFont().getSize());
+        } else {
             gameOver(g);
         }
     }
@@ -88,8 +94,8 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void placeApple() {
-        appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        appleX = random.nextInt( (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        appleY = random.nextInt( (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     public void collecting() {
@@ -110,10 +116,10 @@ public class GamePanel extends JPanel implements ActionListener {
         if ((x[0] < 0) || x[0] > SCREEN_WIDTH)
             gameStarted = false;
 
-        if((y[0] < 0) || y[0] > SCREEN_HEIGHT)
-             gameStarted = false;
+        if ((y[0] < 0) || y[0] > SCREEN_HEIGHT)
+            gameStarted = false;
 
-        if(!gameStarted){
+        if (!gameStarted) {
             timer.stop();
 
         }
@@ -123,6 +129,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void gameOver(Graphics g) {
         gameStarted = false;
+
+        scoreList.add(appleCount);
         timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
         g.setColor(new Color(25, 25, 25));
@@ -134,6 +142,10 @@ public class GamePanel extends JPanel implements ActionListener {
         timer2 = new Timer(3000, this);
         timer2.setRepeats(false);
         timer2.start();
+    }
+
+    public  List<Integer> passedScore() {
+        return scoreList;
     }
 
     public void dispose() {

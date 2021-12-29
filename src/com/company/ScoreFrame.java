@@ -5,13 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class ScoreFrame extends JFrame implements ActionListener {
     static final int width = 750;
     static final int height = 375;
     JLabel score = new JLabel("The current High-Score is: 0");
     JButton button = new JButton("Back");
 
+
+
     ScoreFrame(){
+
         this.setTitle("High-Score");
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setPreferredSize(new Dimension(width, height));
