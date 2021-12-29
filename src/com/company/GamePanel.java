@@ -131,9 +131,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
 
     public void gameOver(Graphics g) {
-        gameStarted = false;
 
-        scoreClass.setScoreList(appleCount);
+        scoreClass.setScore(appleCount);
+        System.out.println(scoreClass.getScore());
+        gameStarted = false;
         timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
         g.setColor(new Color(25, 25, 25));
@@ -204,6 +205,23 @@ public class GamePanel extends JPanel implements ActionListener {
                     break;
             }
 
+        }
+    }
+    public static class ScoreClass {
+        private static int score;
+
+        public ScoreClass( ) {
+
+        }
+
+        public static int getScore() {
+
+            return score;
+        }
+
+        public void setScore( int score) {
+
+            ScoreClass.score = score;
         }
     }
 }
