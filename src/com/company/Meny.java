@@ -5,10 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 
 
-public class Meny extends JPanel implements ActionListener {
+public class Meny extends JPanel implements ActionListener , Serializable {
     static final int width = 1300;
     static final int height = 750;
 

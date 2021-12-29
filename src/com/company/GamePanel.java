@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-    List<Integer> scoreList = new ArrayList<>();
+
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean gameStarted = false;
     Timer timer;
     Timer timer2;
-
+    ScoreClass scoreClass = new ScoreClass();
     int appleX;
     int appleY;
     int appleCount;
@@ -59,6 +59,8 @@ public class GamePanel extends JPanel implements ActionListener {
             case 'D' -> y[0] += UNIT_SIZE;
         }
     }
+
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -108,6 +110,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void collisionCheck() {
         for (int i = bodyParts; i > 0; i--) {
+
             if ((x[0] == x[i]) && ((y[0] == y[i]))) {
                 gameStarted = false;
                 break;
@@ -130,7 +133,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void gameOver(Graphics g) {
         gameStarted = false;
 
-        scoreList.add(appleCount);
+        scoreClass.setScoreList(appleCount);
         timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
         g.setColor(new Color(25, 25, 25));
