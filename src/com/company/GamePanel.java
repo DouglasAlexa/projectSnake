@@ -78,8 +78,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             }
-        }
-        else {
+        } else {
             gameOver(g);
         }
     }
@@ -92,8 +91,8 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void placeApple() {
-        appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     public void collecting() {
@@ -104,11 +103,31 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
+    public void collisonCheck() {
+        for (int i = bodyParts; i > 0; i--) {
+            if ((x[0] == x[i]) && ((y[0] == y[i]))) {
+                gameStarted = false;
+            }
+        }
+        if ((x[0] < 0) || x[0] > SCREEN_WIDTH);
+            gameStarted = false;
+
+        if((y[0] < 0) || y[0] > SCREEN_HEIGHT);
+             gameStarted = false;
+
+        if(!gameStarted){
+            timer.stop();
+
+        }
+
+    }
+
+
     public void gameOver(Graphics g) {
         gameStarted = false;
         timer.stop();
         g.setFont(new Font("Verdana", Font.BOLD, 52));
-        g.setColor(new Color(25,25,25));
+        g.setColor(new Color(25, 25, 25));
         FontMetrics metricsGame = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metricsGame.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
         g.setFont(new Font("Verdana", Font.PLAIN, 38));
@@ -119,7 +138,7 @@ public class GamePanel extends JPanel implements ActionListener {
         timer2.start();
     }
 
-    public void dispose(){
+    public void dispose() {
         JFrame parent = (JFrame) this.getTopLevelAncestor();
         parent.dispose();
     }
@@ -129,8 +148,9 @@ public class GamePanel extends JPanel implements ActionListener {
         if (gameStarted) {
             moveForward();
             collecting();
-        }
-        else {
+            collisonCheck();
+
+        } else {
             timer2.stop();
             JFrame test = new JFrame();
             test.setVisible(true);
