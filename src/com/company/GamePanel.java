@@ -37,6 +37,22 @@ public class GamePanel extends JPanel implements ActionListener {
         random = new Random();
         startGame();
     }
+  public boolean check_wall_collision(){
+        if(.getX() < 0 || player.getX() >= SCREEN_WIDTH * new Dimension|| player.getY() >= SCREEN_HEIGHT * new Dimension){
+            return true;
+        }
+        return false;
+    }
+    public boolean check_self_collision(){
+        for(int i = 1; i < player.getbody().size(); i++{
+            if(player.getX() == player.getbodyParts().get(i).x && player.getY() == player.getBody().get(i).y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public void startGame() {
         placeApple();
