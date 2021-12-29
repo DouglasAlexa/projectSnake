@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void collisonCheck() {
+    public void collisionCheck() {
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i]) && ((y[0] == y[i]))) {
                 gameStarted = false;
@@ -144,9 +144,7 @@ public class GamePanel extends JPanel implements ActionListener {
         timer2.start();
     }
 
-    public  List<Integer> passedScore() {
-        return scoreList;
-    }
+
 
     public void dispose() {
         JFrame parent = (JFrame) this.getTopLevelAncestor();
@@ -158,7 +156,7 @@ public class GamePanel extends JPanel implements ActionListener {
         if (gameStarted) {
             moveForward();
             collecting();
-            collisonCheck();
+            collisionCheck();
 
         } else {
             timer2.stop();
