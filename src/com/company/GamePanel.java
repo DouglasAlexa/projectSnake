@@ -105,15 +105,15 @@ public class GamePanel extends JPanel implements ActionListener {
     public void collisionCheck() {
         for (int i = bodyParts; i > 0; i--) {
 
-            if ((x[0] == x[i]) && ((y[0] == y[i]))) {
+            if ((x[0] == x[i]) && (y[0] == y[i])) {
                 gameStarted = false;
                 break;
             }
         }
-        if ((x[0] < 0) || x[0] > SCREEN_WIDTH)
+        if ((x[0] < 0) || x[0] >= SCREEN_WIDTH)
             gameStarted = false;
 
-        if ((y[0] < 0) || y[0] > SCREEN_HEIGHT)
+        if ((y[0] < 0) || y[0] >= SCREEN_HEIGHT)
             gameStarted = false;
 
         if (!gameStarted) {
