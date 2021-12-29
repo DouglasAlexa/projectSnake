@@ -108,6 +108,7 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = bodyParts; i > 0; i--) {
             if ((x[0] == x[i]) && ((y[0] == y[i]))) {
                 gameStarted = false;
+                break;
             }
         }
         if ((x[0] < 0) || x[0] > SCREEN_WIDTH)
