@@ -47,14 +47,11 @@ public void dispose(){
         } else if (e.getSource() == playButton) {
 
             JFrame test = new JFrame();
-
             test.setVisible(true);
             test.setLocationRelativeTo(null);
-            test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             test.add(new GamePanel());
             test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             test.setResizable(false);
-            test.pack();
             test.setTitle("Snake 7 - " + getWidth() + " : " + getHeight());
             test.pack();
             test.setLocationRelativeTo(null);
