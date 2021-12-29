@@ -124,6 +124,8 @@ public class GamePanel extends JPanel implements ActionListener {
     public void gameOver(Graphics g) {
         if(GamePanel.ScoreClass.getScore() < appleCount) {
             scoreClass.setScore(appleCount);
+            scoreClass.setName(JOptionPane.showInputDialog("Vad är ditt namn? <3"));
+            repaint();
         }
         gameStarted = false;
         timer.stop();
@@ -195,6 +197,15 @@ public class GamePanel extends JPanel implements ActionListener {
     }
     public static class ScoreClass {
         private static int score;
+        private static String name = "";
+
+        public static String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            ScoreClass.name = name;
+        }
 
         public ScoreClass( ) {
 
