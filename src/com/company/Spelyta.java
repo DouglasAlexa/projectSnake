@@ -1,23 +1,24 @@
 package com.company;
+
 import javax.swing.*;
-import java.awt.*;
 
 
-public class Spelyta extends JFrame{
+public class Spelyta extends JFrame {
 
     public Spelyta() {
 
-             initUI();
-         }
-         public void initUI(){
-             add(new Meny());
-             pack();
-             setResizable(false);
-             setTitle("Snake");
-             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             setLocationRelativeTo(null);
-         }
-     }
+        initUI();
+    }
+
+    public void initUI() {
+        add(new Meny());
+        pack();
+        setResizable(false);
+        setTitle("Snake");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+    }
+}
 
 
 

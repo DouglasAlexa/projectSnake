@@ -78,7 +78,8 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
             }
-        } else {
+        }
+        else {
             gameOver(g);
         }
     }
@@ -91,8 +92,8 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void placeApple() {
-        appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     public void collecting() {
@@ -109,10 +110,10 @@ public class GamePanel extends JPanel implements ActionListener {
                 gameStarted = false;
             }
         }
-        if ((x[0] < 0) || x[0] > SCREEN_WIDTH);
+        if ((x[0] < 0) || x[0] > SCREEN_WIDTH)
             gameStarted = false;
 
-        if((y[0] < 0) || y[0] > SCREEN_HEIGHT);
+        if((y[0] < 0) || y[0] > SCREEN_HEIGHT)
              gameStarted = false;
 
         if(!gameStarted){
