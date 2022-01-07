@@ -8,7 +8,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+
 public class GamePanel extends JPanel implements ActionListener {
+
 
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
@@ -25,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int appleX;
     int appleY;
     int appleCount;
+
     Random random;
 
     GamePanel() {
@@ -55,6 +58,7 @@ public class GamePanel extends JPanel implements ActionListener {
             case 'D' -> y[0] += UNIT_SIZE;
         }
     }
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -90,8 +94,8 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void placeApple() {
-        appleX = random.nextInt( (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt( (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        appleX = random.nextInt((SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+        appleY = random.nextInt((SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
     }
 
     public void collecting() {
@@ -118,11 +122,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
         if (!gameStarted) {
             timer.stop();
+
         }
+
     }
 
+
     public void gameOver(Graphics g) {
-        if(GamePanel.ScoreClass.getScore() < appleCount) {
+        if (GamePanel.ScoreClass.getScore() < appleCount) {
             scoreClass.setScore(appleCount);
             scoreClass.setName(JOptionPane.showInputDialog("Vad är ditt namn? <3"));
             repaint();
@@ -136,10 +143,11 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Verdana", Font.PLAIN, 38));
         FontMetrics metricsScore = getFontMetrics(g.getFont());
         g.drawString("Score: " + appleCount, (SCREEN_WIDTH - metricsScore.stringWidth("Score: " + appleCount)) / 2, SCREEN_HEIGHT - g.getFont().getSize());
-        timer2 = new Timer(3000, this);
+        timer2 = new Timer(750, this);
         timer2.setRepeats(false);
         timer2.start();
     }
+
 
     public void dispose() {
         JFrame parent = (JFrame) this.getTopLevelAncestor();
@@ -152,6 +160,7 @@ public class GamePanel extends JPanel implements ActionListener {
             moveForward();
             collecting();
             collisionCheck();
+
         } else {
             timer2.stop();
             JFrame test = new JFrame();
@@ -167,6 +176,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         repaint();
     }
+
 
     public class MyKeyInput extends KeyAdapter {
         @Override
@@ -193,21 +203,17 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                     break;
             }
+
         }
     }
+
     public static class ScoreClass {
+
         private static int score;
         private static String name = "";
 
-        public static String getName() {
-            return name;
-        }
 
-        public void setName(String name) {
-            ScoreClass.name = name;
-        }
-
-        public ScoreClass( ) {
+        public ScoreClass() {
 
         }
 
@@ -216,8 +222,18 @@ public class GamePanel extends JPanel implements ActionListener {
             return score;
         }
 
-        public void setScore( int score) {
+        public void setScore(int score) {
+
             ScoreClass.score = score;
+        }
+        public static String getName()
+        {
+            return name;
+        }
+
+        public void setName(String name)
+        {
+            ScoreClass.name = name;
         }
     }
 }
